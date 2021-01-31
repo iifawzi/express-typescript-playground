@@ -2,12 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.del = exports.patch = exports.post = exports.put = exports.get = void 0;
 require("reflect-metadata");
-var Methods_1 = require("../helpers/Methods");
+var Methods_1 = require("../enums/Methods");
+var MetaKeys_1 = require("../enums/MetaKeys");
 function routeBundler(method) {
     return function RequestTo(route) {
         return function (target, key, desc) {
-            Reflect.defineMetadata("method", method, target, key);
-            Reflect.defineMetadata("route", route, target, key);
+            Reflect.defineMetadata(MetaKeys_1.MetaKeys.method, method, target, key);
+            Reflect.defineMetadata(MetaKeys_1.MetaKeys.route, route, target, key);
         };
     };
 }

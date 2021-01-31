@@ -1,5 +1,5 @@
 import "reflect-metadata"
-import {Methods} from "../helpers/Methods"
+import {Methods} from "../enums/Methods"
 import { AppRouter } from "../settings/AppRouter";
 
 export function Controller(prefix: string) {
