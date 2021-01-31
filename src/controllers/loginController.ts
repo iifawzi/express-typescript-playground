@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express"
 import { Controller, get, Use } from "../Decorators/";
 
-function Logger(req: Request, res: Response, next: NextFunction){
+function Logger(req: Request, res: Response, next: NextFunction) {
     console.log("a request is made!");
     next();
 }
@@ -10,7 +10,7 @@ function Logger(req: Request, res: Response, next: NextFunction){
 class loginController {
     @get("/")
     @Use(Logger)
-    getHome(req: Request, res: Response, next: NextFunction){
+    getHome(req: Request, res: Response, next: NextFunction) {
         res.send("wow?");
     }
 }

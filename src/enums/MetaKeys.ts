@@ -1,5 +1,5 @@
 export enum MetaKeys {
-    method  = "method",
+    method = "method",
     route = "route",
     middlewares = "middlewares"
 }
