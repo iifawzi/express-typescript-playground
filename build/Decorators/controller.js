@@ -7,19 +7,19 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
     return r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.router = exports.controller = void 0;
+exports.Controller = void 0;
 require("reflect-metadata");
-var express_1 = require("express");
-var router = express_1.Router();
-exports.router = router;
-function controller(prefix) {
+var AppRouter_1 = require("../settings/AppRouter");
+function Controller(prefix) {
     return function (constructor) {
+        var router = AppRouter_1.AppRouter.getInstance;
         var prototype = constructor.prototype;
         for (var key in prototype) {
-            var request = Reflect.getMetadata("request", prototype, key);
+            var method = Reflect.getMetadata("method", prototype, key);
+            var route = Reflect.getMetadata("route", prototype, key);
             var middlewares = Reflect.getMetadata("middlewares", prototype, key) || [];
-            router[request.method].apply(router, __spreadArrays([request.route], middlewares, [prototype[key]]));
+            router[method].apply(router, __spreadArrays([prefix + route], middlewares, [prototype[key]]));
         }
     };
 }
-exports.controller = controller;
+exports.Controller = Controller;

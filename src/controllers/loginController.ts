@@ -1,18 +1,14 @@
 import { Request, Response, NextFunction } from "express"
-import { controller } from "../Decorators/controller";
-import { RequestTo } from "../Decorators/Request"
-import { Use } from "../Decorators/use";
+import { Controller, get, Use } from "../Decorators/";
 
 function Logger(req: Request, res: Response, next: NextFunction){
     console.log("a request is made!");
     next();
 }
 
-@controller("/login")
+@Controller("/login")
 class loginController {
-    color: string = "red";
-
-    @RequestTo({method: 'get', route: '/'})
+    @get("/")
     @Use(Logger)
     getHome(req: Request, res: Response, next: NextFunction){
         res.send("wow?");
