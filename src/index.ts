@@ -1,15 +1,12 @@
-import express, {Request, Response} from "express"
-import {router} from "./routes/loginRoutes"
+import express, {Request, Response, NextFunction} from "express"
 import bodyParser from "body-parser"
-import cookieSession from 'cookie-session'
-
+import {router} from "./Decorators/controller"
+import "./controllers/loginController"
 
 const app = express();
 
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(cookieSession({keys: ['testhatestha']}));
 app.use(router);
-
 
 app.listen(3000,()=>{
     console.log("listening on port 3000");
