@@ -14,9 +14,12 @@ var router = express_1.Router();
 exports.router = router;
 function controller(prefix) {
     return function (constructor) {
-        var request = Reflect.getMetadata("request", constructor.prototype, "getHome");
-        var middlewares = Reflect.getMetadata("middlewares", constructor.prototype, "getHome") || [];
-        router[request.method].apply(router, __spreadArrays([request.route], middlewares, [constructor.prototype["getHome"]]));
+        var prototype = constructor.prototype;
+        for (var key in prototype) {
+            var request = Reflect.getMetadata("request", prototype, key);
+            var middlewares = Reflect.getMetadata("middlewares", prototype, key) || [];
+            router[request.method].apply(router, __spreadArrays([request.route], middlewares, [prototype[key]]));
+        }
     };
 }
 exports.controller = controller;
